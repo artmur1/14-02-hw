@@ -63,6 +63,14 @@
 
 ### Решение 2
 
+![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-02-1.png)
+
+![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-02-2.png)
+
+![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-02-3.png)
+
+![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-02-4.png)
+
 ## Задача 3
 
 Используя SQL-синтаксис, наполните таблицы следующими тестовыми данными:
@@ -97,6 +105,20 @@
 
 ### Решение 3
 
+Наполнение таблиц данными:
+
+    INSERT INTO orders (name, price) VALUES ('Chocolate', '10'), ('Printer', '3000'), ('Book', '500'), ('Monitor', '7000'), ('Guitar', '4000');
+    INSERT INTO clients (surname, country) VALUES ('Иванов Иван Иванович', 'USA'), ('Петров Петр Петрович', 'Canada'), ('Иоганн Себастьян Бах', 'Japan'), ('Ронни Джеймс Дио', 'Russia'), ('Ritchie Blackmore', 'Russia');
+
+Вычисление количества записей для каждой таблицы:
+
+    select count(*) as "count clients" from clients c ;
+    select count(*) as "count orders"  from orders o ;
+
+![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-03-1.png)
+
+![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-03-2.png)
+
 ## Задача 4
 
 Часть пользователей из таблицы clients решили оформить заказы из таблицы orders.
@@ -117,6 +139,14 @@
 
 ### Решение 4
 
+    UPDATE clients SET orders = 3 where id  = 1;
+    UPDATE clients SET orders = 4 where id  = 2;
+    UPDATE clients SET orders = 5 where id  = 3;
+    select surname, orders from clients c
+where orders > 0;
+
+![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-04-2.png)
+
 ## Задача 5
 
 Получите полную информацию по выполнению запроса выдачи всех пользователей из задачи 4 
@@ -125,6 +155,10 @@
 Приведите получившийся результат и объясните, что значат полученные значения.
 
 ### Решение 5
+
+В результате выполнения запроса Explain видно какая стоимость запроса "cost".
+
+![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-05-1.png)
 
 ## Задача 6
 
@@ -139,6 +173,14 @@
 Приведите список операций, который вы применяли для бэкапа данных и восстановления. 
 
 ### Решение 6
+
+    pg_dump -d test_db -U user -h 192.168.1.124 -p 5432 > /tmp/test_db.dump
+
+    create database test_db;
+
+    psql -d test_db -U user -h 192.168.1.124 -p 15432 < /tmp/test_db.dump
+
+![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-06-1.png)
 
 ---
 
