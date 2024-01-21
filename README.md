@@ -143,7 +143,7 @@
     UPDATE clients SET orders = 4 where id  = 2;
     UPDATE clients SET orders = 5 where id  = 3;
     select surname, orders from clients c
-where orders > 0;
+    where orders > 0;
 
 ![alt text](https://github.com/artmur1/14-02-hw/blob/main/14-02-hw-04-2.png)
 
