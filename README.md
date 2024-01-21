@@ -176,7 +176,35 @@
 
     pg_dump -d test_db -U user -h 192.168.1.124 -p 5432 > /tmp/test_db.dump
 
+Поднял новый контейнер с помощью нового compose:
+
+    version: "3.9"
+    services:
+      postgres:
+        image: postgres:12-alpine3.18
+        container_name: postgres2
+        restart: unless-stopped
+        environment:
+          POSTGRES_USER: "user"
+          POSTGRES_PASSWORD: "secret"
+          POSTGRES_ROOT_PASSWORD: "rootsecret"
+          PGDATA: "/var/lib/postgresql2/data/pgdata"
+        volumes:
+          - ../2. Init Database:/docker-entrypoint-initdb.d
+          - db-data2:/var/lib/postgresql2/data
+          - backup2:/var/lib/postgresql2/data
+        ports:
+          - "15432:5432"
+    
+    volumes:
+      db-data2:
+      backup2:
+
+В новом контейнере создал БД test_db:
+
     create database test_db;
+
+Восстановил бэкап в новую test_db:
 
     psql -d test_db -U user -h 192.168.1.124 -p 15432 < /tmp/test_db.dump
 
